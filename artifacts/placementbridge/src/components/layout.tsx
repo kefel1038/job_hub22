@@ -27,7 +27,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
           <div className="flex items-center gap-6">
             <Link href="/" className="flex items-center gap-2 transition-opacity hover:opacity-80">
               <Shield className="h-6 w-6 text-primary" />
-              <span className="font-bold text-lg tracking-tight">PlacementBridge</span>
+              <span className="font-bold text-lg tracking-tight">JobBridge</span>
             </Link>
 
             <nav className="hidden md:flex items-center gap-1">
@@ -102,7 +102,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <div className="container mx-auto px-4 text-center">
           <div className="flex items-center justify-center gap-2 mb-4">
             <Shield className="h-5 w-5 text-primary" />
-            <span className="font-bold text-lg tracking-tight">PlacementBridge</span>
+            <span className="font-bold text-lg tracking-tight">JobBridge</span>
           </div>
           <p className="text-muted-foreground mb-6">
             The hiring platform Qatar professionals trust.
@@ -114,7 +114,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
             <Link href="/post-job" className="hover:text-primary transition-colors">Post a Job</Link>
           </div>
           <div className="mt-8 pt-8 border-t border-border/50 text-sm text-muted-foreground">
-            &copy; {new Date().getFullYear()} PlacementBridge. All rights reserved.
+            &copy; {new Date().getFullYear()} JobBridge. All rights reserved.
           </div>
         </div>
       </footer>

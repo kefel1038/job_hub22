@@ -31,7 +31,7 @@ export default function Home() {
           </h1>
           
           <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-10">
-            PlacementBridge surfaces only AI-screened, verified jobs in the GCC region. No fake listings, no ghosting.
+            JobBridge surfaces only AI-screened, verified jobs in the GCC region. No fake listings, no ghosting.
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center max-w-2xl mx-auto mb-16">
@@ -184,7 +184,7 @@ export default function Home() {
         <div className="absolute inset-0 bg-primary opacity-5 dark:opacity-10" />
         <div className="container relative z-10 mx-auto px-4 text-center">
           <h2 className="text-3xl md:text-4xl font-bold tracking-tight mb-6">Ready to find your next role?</h2>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto mb-8">Join thousands of professionals in Qatar using PlacementBridge for a transparent hiring experience.</p>
+          <p className="text-lg text-muted-foreground max-w-2xl mx-auto mb-8">Join thousands of professionals in Qatar using JobBridge for a transparent hiring experience.</p>
           <Button size="lg" className="h-14 px-8 text-base shadow-md font-semibold" asChild>
             <Link href="/jobs">Browse Verified Jobs</Link>
           </Button>
