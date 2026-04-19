@@ -1,17 +1,19 @@
 import { Layout } from "@/components/layout";
 import { useGetDashboardStats, useGetCategoryStats, useListJobs, getListJobsQueryKey, useVerifyJob } from "@workspace/api-client-react";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
-import { ShieldCheck, ShieldAlert, ShieldX, Briefcase, Building, Users, Activity, ExternalLink } from "lucide-react";
+import { ShieldCheck, ShieldAlert, ShieldX, Briefcase, Building, Users, Activity, ExternalLink, LogOut } from "lucide-react";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Link } from "wouter";
+import { Link, useLocation } from "wouter";
 import { formatDistanceToNow } from "date-fns";
 import { useQueryClient } from "@tanstack/react-query";
 import { useToast } from "@/hooks/use-toast";
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
+import { adminLogout } from "@/hooks/use-auth";
 
 export default function Dashboard() {
+  const [, navigate] = useLocation();
   const { data: stats, isLoading: statsLoading } = useGetDashboardStats();
   const { data: categoryStats, isLoading: categoryLoading } = useGetCategoryStats();
   const { data: recentJobs, isLoading: jobsLoading } = useListJobs();
@@ -19,6 +21,11 @@ export default function Dashboard() {
   const verifyJob = useVerifyJob();
   const queryClient = useQueryClient();
   const { toast } = useToast();
+
+  const handleLogout = async () => {
+    await adminLogout();
+    navigate("/admin/login");
+  };
 
   const handleVerify = async (jobId: number) => {
     try {
@@ -47,9 +54,15 @@ export default function Dashboard() {
             <h1 className="text-3xl font-bold tracking-tight">Platform Dashboard</h1>
             <p className="text-muted-foreground mt-1">Monitor trust metrics and platform activity.</p>
           </div>
-          <Button asChild>
-            <Link href="/post-job">Post New Job</Link>
-          </Button>
+          <div className="flex items-center gap-2">
+            <Button asChild>
+              <Link href="/post-job">Post New Job</Link>
+            </Button>
+            <Button variant="outline" onClick={handleLogout} className="gap-2">
+              <LogOut className="h-4 w-4" />
+              Sign Out
+            </Button>
+          </div>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
