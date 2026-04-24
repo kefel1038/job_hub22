@@ -2,19 +2,13 @@ import { Router, type IRouter } from "express";
 import healthRouter from "./health";
 import authRouter from "./auth";
 import jobsRouter from "./jobs";
-import companiesRouter from "./companies";
-import applicationsRouter from "./applications";
-import categoriesRouter from "./categories";
-import statsRouter from "./stats";
+import stripeRouter from "./stripe";
 
 const router: IRouter = Router();
 
 router.use(healthRouter);
 router.use(authRouter);
 router.use(jobsRouter);
-router.use(companiesRouter);
-router.use(applicationsRouter);
-router.use(categoriesRouter);
-router.use(statsRouter);
+router.use(stripeRouter);
 
 export default router;

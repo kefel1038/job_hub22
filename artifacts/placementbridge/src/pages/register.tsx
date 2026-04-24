@@ -6,12 +6,14 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { api, setAuth } from "@/lib/api";
 
-export default function Login() {
+export default function Register() {
   const [, navigate] = useLocation();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [role, setRole] = useState<"jobseeker" | "employer">("jobseeker");
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
 
@@ -20,11 +22,11 @@ export default function Login() {
     setLoading(true);
     setError(null);
     try {
-      const { token, user } = await api.login(email, password);
+      const { token, user } = await api.register(email, password, role);
       setAuth(token, user);
-      navigate("/");
+      navigate(role === "employer" ? "/post-job" : "/");
     } catch (e) {
-      setError(e instanceof Error ? e.message : "Login failed.");
+      setError(e instanceof Error ? e.message : "Registration failed.");
     } finally {
       setLoading(false);
     }
@@ -39,11 +41,29 @@ export default function Login() {
             <div className="flex justify-center mb-2">
               <Briefcase className="h-8 w-8 text-primary" />
             </div>
-            <CardTitle>Welcome back</CardTitle>
-            <CardDescription>Sign in to your JobBoard account</CardDescription>
+            <CardTitle>Create your account</CardTitle>
+            <CardDescription>Join JobBoard as a job seeker or employer</CardDescription>
           </CardHeader>
           <CardContent>
             <form onSubmit={handleSubmit} className="space-y-4">
+              <div className="space-y-2">
+                <Label>I am a...</Label>
+                <RadioGroup
+                  value={role}
+                  onValueChange={(v) => setRole(v as "jobseeker" | "employer")}
+                  className="grid grid-cols-2 gap-3"
+                >
+                  <label className="flex items-center gap-2 border rounded-md p-3 cursor-pointer hover:bg-muted/50 has-[:checked]:border-primary has-[:checked]:bg-primary/5">
+                    <RadioGroupItem value="jobseeker" />
+                    <span className="text-sm font-medium">Job Seeker</span>
+                  </label>
+                  <label className="flex items-center gap-2 border rounded-md p-3 cursor-pointer hover:bg-muted/50 has-[:checked]:border-primary has-[:checked]:bg-primary/5">
+                    <RadioGroupItem value="employer" />
+                    <span className="text-sm font-medium">Employer</span>
+                  </label>
+                </RadioGroup>
+              </div>
+
               <div className="space-y-2">
                 <Label htmlFor="email">Email</Label>
                 <Input
@@ -61,10 +81,12 @@ export default function Login() {
                 <Input
                   id="password"
                   type="password"
+                  placeholder="At least 6 characters"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   required
-                  autoComplete="current-password"
+                  minLength={6}
+                  autoComplete="new-password"
                 />
               </div>
 
@@ -75,14 +97,14 @@ export default function Login() {
               )}
 
               <Button type="submit" className="w-full" disabled={loading}>
-                {loading ? "Signing in..." : "Sign in"}
+                {loading ? "Creating account..." : "Create account"}
               </Button>
             </form>
 
             <p className="mt-6 text-center text-sm text-muted-foreground">
-              Don't have an account?{" "}
-              <Link href="/register" className="text-primary font-medium hover:underline">
-                Sign up
+              Already have an account?{" "}
+              <Link href="/login" className="text-primary font-medium hover:underline">
+                Sign in
               </Link>
             </p>
           </CardContent>
