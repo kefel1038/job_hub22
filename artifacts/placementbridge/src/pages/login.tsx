@@ -85,6 +85,12 @@ export default function Login() {
                 Sign up
               </Link>
             </p>
+            <p className="mt-2 text-center text-xs text-muted-foreground">
+              Site administrator?{" "}
+              <Link href="/admin/signup" className="font-medium hover:underline">
+                Create admin account
+              </Link>
+            </p>
           </CardContent>
         </Card>
       </div>
