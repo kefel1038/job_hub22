@@ -109,4 +109,34 @@ export const api = {
       method: "POST",
     });
   },
+  registerAdmin(email: string, password: string, adminSecret: string) {
+    return request<{ token: string; user: User }>("/register-admin", {
+      method: "POST",
+      body: JSON.stringify({ email, password, adminSecret }),
+    });
+  },
+  adminStats() {
+    return request<{
+      totalUsers: number;
+      totalJobs: number;
+      featuredJobs: number;
+      usersByRole: Record<string, number>;
+    }>("/admin/stats");
+  },
+  adminListUsers() {
+    return request<
+      Array<{ id: number; email: string; role: string; createdAt: string }>
+    >("/admin/users");
+  },
+  adminUpdateRole(id: number, role: "jobseeker" | "employer" | "admin") {
+    return request<User>(`/admin/users/${id}/role`, {
+      method: "PATCH",
+      body: JSON.stringify({ role }),
+    });
+  },
+  adminDeleteUser(id: number) {
+    return request<{ success: boolean }>(`/admin/users/${id}`, {
+      method: "DELETE",
+    });
+  },
 };

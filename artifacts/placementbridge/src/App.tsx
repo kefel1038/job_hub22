@@ -8,6 +8,8 @@ import Login from "@/pages/login";
 import Register from "@/pages/register";
 import PostJob from "@/pages/post-job";
 import JobDetail from "@/pages/job-detail";
+import Admin from "@/pages/admin";
+import AdminSignup from "@/pages/admin-signup";
 
 function Router() {
   return (
@@ -17,6 +19,8 @@ function Router() {
       <Route path="/register" component={Register} />
       <Route path="/post-job" component={PostJob} />
       <Route path="/jobs/:id" component={JobDetail} />
+      <Route path="/admin" component={Admin} />
+      <Route path="/admin/signup" component={AdminSignup} />
       <Route component={NotFound} />
     </Switch>
   );

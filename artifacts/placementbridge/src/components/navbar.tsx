@@ -1,5 +1,5 @@
 import { Link, useLocation } from "wouter";
-import { Briefcase } from "lucide-react";
+import { Briefcase, Shield } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { useAuth } from "@/hooks/use-auth";
@@ -18,7 +18,7 @@ export function Navbar() {
       <div className="container mx-auto px-4 h-16 flex items-center justify-between">
         <Link href="/" className="flex items-center gap-2 font-bold text-lg">
           <Briefcase className="h-5 w-5 text-primary" />
-          <span>JobBoard</span>
+          <span>KeFeL Jobs</span>
         </Link>
         <nav className="flex items-center gap-2">
           <Button variant="ghost" asChild>
@@ -27,6 +27,14 @@ export function Navbar() {
           {user && (user.role === "employer" || user.role === "admin") && (
             <Button variant="ghost" asChild>
               <Link href="/post-job">Post Job</Link>
+            </Button>
+          )}
+          {user && user.role === "admin" && (
+            <Button variant="ghost" asChild className="gap-1.5">
+              <Link href="/admin">
+                <Shield className="h-4 w-4" />
+                Admin
+              </Link>
             </Button>
           )}
           {user ? (

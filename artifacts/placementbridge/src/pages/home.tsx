@@ -32,7 +32,7 @@ export default function Home() {
             Find your next opportunity
           </h1>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto mb-6">
-            Browse open positions from employers around the world. Sign up as an employer to post a job for $20.
+            Welcome to KeFeL Jobs — browse open positions from employers around the world. Sign up as an employer to post a featured job for $20.
           </p>
           {!user && (
             <div className="flex justify-center gap-3">

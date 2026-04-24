@@ -40,7 +40,7 @@ export default function Login() {
               <Briefcase className="h-8 w-8 text-primary" />
             </div>
             <CardTitle>Welcome back</CardTitle>
-            <CardDescription>Sign in to your JobBoard account</CardDescription>
+            <CardDescription>Sign in to your KeFeL Jobs account</CardDescription>
           </CardHeader>
           <CardContent>
             <form onSubmit={handleSubmit} className="space-y-4">

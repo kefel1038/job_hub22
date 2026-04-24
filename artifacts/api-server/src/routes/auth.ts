@@ -70,4 +70,43 @@ router.get("/me", authMiddleware, (req, res) => {
   res.json({ user: req.user });
 });
 
+router.post("/register-admin", async (req, res) => {
+  const { email, password, adminSecret } = req.body ?? {};
+  if (
+    typeof email !== "string" ||
+    typeof password !== "string" ||
+    typeof adminSecret !== "string"
+  ) {
+    res.status(400).json({ error: "Email, password, and adminSecret are required." });
+    return;
+  }
+  if (!process.env.ADMIN_PASSWORD) {
+    res.status(500).json({ error: "Admin signup is not configured." });
+    return;
+  }
+  if (adminSecret !== process.env.ADMIN_PASSWORD) {
+    res.status(403).json({ error: "Invalid admin secret." });
+    return;
+  }
+  if (password.length < 6) {
+    res.status(400).json({ error: "Password must be at least 6 characters." });
+    return;
+  }
+
+  const existing = await db.select().from(users).where(eq(users.email, email)).limit(1);
+  if (existing.length > 0) {
+    res.status(409).json({ error: "Email already registered." });
+    return;
+  }
+
+  const hashed = await bcrypt.hash(password, 10);
+  const [created] = await db
+    .insert(users)
+    .values({ email, password: hashed, role: "admin" })
+    .returning({ id: users.id, email: users.email, role: users.role });
+
+  const token = signToken({ id: created.id, email: created.email, role: created.role });
+  res.status(201).json({ token, user: created });
+});
+
 export default router;
