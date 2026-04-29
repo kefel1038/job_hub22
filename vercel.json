@@ -2,19 +2,7 @@
   "version": 2,
   "installCommand": "pnpm install",
   "buildCommand": "pnpm run build",
-  "builds": [
-    {
-      "src": "api/index.ts",
-      "use": "@vercel/node"
-    },
-    {
-      "src": "artifacts/placementbridge/package.json",
-      "use": "@vercel/static-build",
-      "config": {
-        "distDir": "dist/public"
-      }
-    }
-  ],
+  "outputDirectory": "artifacts/placementbridge/dist/public",
   "routes": [
     {
       "src": "/api/(.*)",
