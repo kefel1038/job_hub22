@@ -26,5 +26,8 @@
       "src": "/(.*)",
       "dest": "/artifacts/placementbridge/dist/public/index.html"
     }
-  ]
+  ],
+  "env": {
+    "PNPM_VERSION": "10.33.2"
+  }
 }
