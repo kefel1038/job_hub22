@@ -1,7 +1,7 @@
 {
   "version": 2,
-  "installCommand": "cd artifacts/placementbridge && pnpm install",
-  "buildCommand": "cd artifacts/placementbridge && pnpm run build",
+  "installCommand": "pnpm install",
+  "buildCommand": "pnpm run build",
   "outputDirectory": "artifacts/placementbridge/dist/public",
   "routes": [
     {
