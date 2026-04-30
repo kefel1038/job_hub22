@@ -1,18 +1,11 @@
 {
   "version": 2,
-  "builds": [
-    {
-      "src": "artifacts/placementbridge/package.json",
-      "use": "@vercel/static-build",
-      "config": {
-        "distDir": "dist/public"
-      }
-    }
-  ],
+  "buildCommand": "cd artifacts/placementbridge && pnpm install && pnpm run build",
+  "outputDirectory": "artifacts/placementbridge/dist/public",
   "routes": [
     {
       "src": "/(.*)",
-      "dest": "artifacts/placementbridge/dist/public/$1"
+      "dest": "/$1"
     }
   ]
 }
